@@ -20,10 +20,11 @@ namespace WinFormsDataGridView
         private void btnIncluir_Click(object sender, EventArgs e)
         {
             //adiciona o conteudo das textbox a colunas
-            dgvAlunos.Rows.Add(txtNome.Text, txtCurso.Text);
+            dgvAlunos.Rows.Add(txtNome.Text, txtCurso.Text, txtCidade.Text);
             //limpa a caixa de texto
             txtNome.Clear();
             txtCurso.Clear();
+            txtCidade.Clear();
 
             MessageBox.Show("Aluno Incluido com sucesso!", "Inclusão", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             //exibe na label o contador de linhas do gridview atualizado
@@ -55,6 +56,8 @@ namespace WinFormsDataGridView
             {
                 //Move o conteudo na primeira celula da linha selecionada para a textbox
                 txtAlteracao.Text = dgvAlunos.CurrentRow.Cells[0].Value.ToString(); //pega a posição da celula
+                txtAlteraCurso.Text = dgvAlunos.CurrentRow.Cells[1].Value.ToString();
+                txtAlteraCidade.Text = dgvAlunos.CurrentRow.Cells[2].Value.ToString();
                 //txtAlteracao.Text = dgvAlunos.CurrentRow.Cells["colnome"].Value.ToString(); //pega a celula pelo nome
 
             }
@@ -67,9 +70,14 @@ namespace WinFormsDataGridView
             {
                 //Move o novo valor da caixa de texto para a celula
                 dgvAlunos.CurrentRow.Cells[0].Value = txtAlteracao.Text; //vai pela posiçaõ da celula
+                dgvAlunos.CurrentRow.Cells[1].Value = txtAlteraCurso.Text;
+                dgvAlunos.CurrentRow.Cells[2].Value = txtAlteraCidade.Text;
                 //dgvAlunos.CurrentRow.Cells["colnome"].Value = txtAlteracao.Text; //vai pelo nome da celula
                 //exibe mensagem de alteração com sucesso
                 MessageBox.Show("Aluno alterado com sucesso", "Exclusão", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                txtAlteraCidade.ResetText();
+                txtAlteracao.ResetText();
+                txtAlteraCurso.ResetText();
             }
         }
 
@@ -79,11 +87,16 @@ namespace WinFormsDataGridView
             dgvAlunos.RowCount = 0;
 
             lblTotal.Text = dgvAlunos.RowCount.ToString();
+            txtAlteraCidade.ResetText();
+            txtAlteracao.ResetText();
+            txtAlteraCurso.ResetText();
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+        
     }
 }
